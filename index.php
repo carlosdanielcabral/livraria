@@ -1,6 +1,9 @@
 <?php
-	$pagina_atual = $_GET['pagina'] ? $_GET['pagina'] : "sobre";
-	$erro = $_GET['erro'];
+error_reporting(E_ERROR | E_PARSE);
+
+$pagina_atual = !$_GET['pagina'] ? "sobre" : $_GET['pagina'];
+$erro = !$_GET['erro'] ? '' : $_GET['erro'];
+
 ?>
 
 <html lang="pt-br">

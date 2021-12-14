@@ -8,7 +8,6 @@ require "../Models/Editora.php";
 require "../Models/Autor.php";
 require "../Models/LivroAutor.php";
 
-$acao = $_GET['acao'] ? $_GET['acao'] : "indefinida";
 $tipo = $_GET['tipo'] ? $_GET['tipo'] : "indefinido";
 
 

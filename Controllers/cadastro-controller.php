@@ -12,7 +12,7 @@ $tipo = $_GET['tipo'] ? $_GET['tipo'] : "indefinido";
 
 
 function formatarDado($dado) {
-	return str_ireplace(" ", "-", (trim(strtolower($dado))));
+	return str_ireplace(" ", "*", (trim(strtolower($dado))));
 }
 
 $livro = new Livro();
