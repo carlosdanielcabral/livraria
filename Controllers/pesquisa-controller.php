@@ -47,7 +47,7 @@ if ($pesquisaEscolha === 'livro') {
 
 	$_SESSION['resultados'] = $resultados;
 	
-	header('Location: ../index.php/?pagina=resultados&tipo=editora');
+	header('Location: ../index.php?pagina=resultados&tipo=editora');
 
 } else {
 
@@ -59,4 +59,5 @@ if ($pesquisaEscolha === 'livro') {
 	}
 	
 	$_SESSION['resultados'] = $resultados;
+	header('Location: ../index.php?pagina=resultados&tipo=autor');
 }

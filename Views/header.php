@@ -15,13 +15,13 @@
 	            Cadastrar
 	          </a>
 	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	            <li><a class="dropdown-item" href="/index.php/?pagina=cadastro/livro">Livro</a></li>
-	            <li><a class="dropdown-item" href="/index.php/?pagina=cadastro/editora">Editora</a></li>
-	            <li><a class="dropdown-item" href="/index.php/?pagina=cadastro/autor">Autor</a></li>
+	            <li><a class="dropdown-item" href="/index.php?pagina=cadastro/livro">Livro</a></li>
+	            <li><a class="dropdown-item" href="/index.php?pagina=cadastro/editora">Editora</a></li>
+	            <li><a class="dropdown-item" href="/index.php?pagina=cadastro/autor">Autor</a></li>
 	          </ul>
 	        </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="/index.php/?pagina=pesquisa">Pesquisa</a>
+	        <a class="nav-link" href="/index.php?pagina=pesquisa">Pesquisa</a>
 	      </li>
 	    </ul>
 	  </div>

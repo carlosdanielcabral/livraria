@@ -28,7 +28,6 @@
 
 		<button type="submit" class="btn btn-success">Pesquisar</button>
 	</form>
-</section>
 
 <script>
 	const especifico = document.getElementById('especifico');
@@ -42,3 +41,4 @@
 		pesquisa.disabled = true;
 	});
 </script>
+</section>

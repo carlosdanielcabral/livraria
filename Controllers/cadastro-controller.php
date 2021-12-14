@@ -60,7 +60,7 @@ switch ($tipo) {
 			$livroAutor = new LivroAutor();
 
 			$livroAutor->idLivro = $idLivro;
-			$livroAutor->idAutor  $idAutor;
+			$livroAutor->idAutor = $idAutor;
 
 			$livroAutor->cadastrarDados();
 
@@ -74,7 +74,7 @@ switch ($tipo) {
 	case 'editora': 
 		['nome' => $nome, 'endereco' => $endereco, 'cidade' => $cidade, 'email' => $email, 'telefone' => $telefone] = $_POST;
 
-		$nome = formatarDado($editora);
+		$nome = formatarDado($nome);
 		$endereco = formatarDado($endereco);
 		$cidade = formatarDado($cidade);
 		$email = formatarDado($email);

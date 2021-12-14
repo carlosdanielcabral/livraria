@@ -45,32 +45,52 @@ foreach ($resultados as $resultado) {
 <?php 
 		} else if ($tipoResultado === 'editora') {
 
-			['endereco' => $endereco, 'cidade' => $cidade, 'telefone' => $telefone, 'email' => $email] = $resultado;
+			['nome' => $nome, 'endereco' => $endereco, 'cidade' => $cidade, 'telefone' => $telefone, 'email' => $email] = $resultado;
+			$nome = formatarDados($nome);
+			$endereco = formatarDados($endereco);
+			$cidade = formatarDados($cidade);
+			$telefone = formatarDados($telefone);
+			$email = formatarDados($email);
 ?>
 
 <section class="editora">
-	<h2 class="nome"><?= $nome ?></h2>
+	<h2 class="nome"><?=$nome?></h2>
 	<ul>
+
 		<h3>Informações</h3>
-		<li>
-			Endereço: <?= $endereco ?>
-		</li>
+		<li>Endereço: <?= $endereco ?></li>
 
-		<li>
-			Cidade: <?= $cidade ?>
-		</li>
+		<li>Cidade: <?= $cidade ?></li>
 
-		<li>
-			Email: <?= $email ?>
-		</li>
+		<li>Email: <?= $email ?></li>
 
-		<li>
-			Telefone: <?= $telefone ?>
-		</li>
+		<li>Telefone: <?= $telefone ?></li>
 	</ul>
 </section>
 
 <?php 
+		} else {
+			['nome' => $nome, 'email' => $email, 'formacao' => $formacao, 'foto' => $foto] = $resultado;
+
+			$nome = formatarDados($nome);
+			$email = formatarDados($email);
+			$formacao = formatarDados($formacao);
+			$img = 'autores-img/'.$foto;
+?>
+
+<section class="autor">
+	<h2 class="titulo"><?=$nome?></h2>
+	<section class="capa-img">
+		<img style="width: 200px"src=<?= $img ?> alt="Não possui foto"/>
+	</section>
+
+	<ul>
+		<li>Email: <?= $email ?></li>
+		<li>Formação: <?= $formacao ?></li>
+	</ul>
+</section>
+
+<?php
 		}
 	}
 ?>

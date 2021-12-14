@@ -1,9 +1,16 @@
 .navbar {
-	background-color: #c9bf97!important;
+	background-color: #f7f7f7!important;
+}
+
+.navbar-brand {
+	font-family: 'Fleur De Leah', cursive, serif;
+	font-size: 32px;
+	font-weight: 400;
+	color: #99843f;
 }
 
 .navbar-brand, .nav-link {
-	color: white!important;
+	color: #99843f!important;
 }
 
 #main {
@@ -14,7 +21,7 @@
 	display: flex;
 }
 
-.livro {
+.livro, .editora, .autor {
 	width: 300px;
 	margin: 10px;
 	padding: 10px;
@@ -25,7 +32,7 @@
 	border-radius: 3px;
 }
 
-.livro:hover {
+.livro:hover, .editora:hover, .autor:hover {
 	box-shadow: 0px 0px 5px 1px #57afbd;
 	border: 1px solid #57afbd;
 }
