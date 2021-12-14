@@ -32,11 +32,10 @@ class Editora extends Conexao{
 	}
 
 	public function buscarEditora() {
-		$query = "SELECT * from editora where nome = :nome";
+		$query = "SELECT * from editora where nome like ?";
 		$stmt = $this->conexao->prepare($query);
-		$stmt->bindValue(':nome', $this->nome);
-		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		$stmt->execute(array("%$this->nome%"));
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function buscarEditoraPorId() {

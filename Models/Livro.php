@@ -55,10 +55,9 @@ class Livro extends Conexao{
 	}
 
 	public function buscarLivro() {
-		$query = "SELECT * from livro where titulo = :titulo";
+		$query = "SELECT * from livro where titulo LIKE ?";
 		$stmt = $this->conexao->prepare($query);
-		$stmt->bindValue(':titulo', $this->titulo);
-		$stmt->execute();
+		$stmt->execute(array("%$this->titulo%"));
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 

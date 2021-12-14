@@ -30,11 +30,10 @@ class Autor extends Conexao{
 	}
 
 	public function buscarAutor() {
-		$query = "SELECT * from autor where nome = :nome";
+		$query = "SELECT * from autor where nome like ?";
 		$stmt = $this->conexao->prepare($query);
-		$stmt->bindValue(':nome', $this->nome);
-		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		$stmt->execute(array("%$this->nome%"));
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function buscarAutorPorId() {
