@@ -1,6 +1,7 @@
 <?php
 
 class Editora extends Conexao{
+	public $id;
 	public $nome;
 	public $endereco;
 	public $cidade;
@@ -25,12 +26,23 @@ class Editora extends Conexao{
 
 	public function listarTodasAsEditoras() {
 		$query = "SELECT * from editora where nome = :nome";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function buscarEditora() {
 		$query = "SELECT * from editora where nome = :nome";
 		$stmt = $this->conexao->prepare($query);
 		$stmt->bindValue(':nome', $this->nome);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	public function buscarEditoraPorId() {
+		$query = "SELECT * from editora where id = :id";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->bindValue(':id', $this->id);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}

@@ -3,9 +3,24 @@
 
 <?php
 session_start();
+require "Models/Conexao.php";
+require "Models/Editora.php";
+require "Models/Autor.php";
+require "Models/LivroAutor.php";
+
 $resultados = $_SESSION['resultados'];
 foreach ($resultados as $resultado) {
-['edicao' => $edicao, 'titulo' => $titulo, 'fotoCapa' => $img, 'isbn' => $isbn] = $resultado;
+['id' => $id,'idEditora' => $idEditora, 'edicao' => $edicao, 'titulo' => $titulo, 'fotoCapa' => $img, 'isbn' => $isbn] = $resultado;
+
+$editora = new Editora();
+$autor = new Autor();
+$livroAutor = new LivroAutor();
+$livroAutor->idLivro = $id;
+$autor->id = ($livroAutor->buscarIdAutor())['idAutor'];
+$nomeAutor = ($autor->buscarAutorPorId())['nome'];
+$editora->id = $idEditora;
+$nomeEditora = ($editora->buscarEditoraPorId())['nome'];
+
 $img = "capas-livros/".$img;
 ?>
 
@@ -15,7 +30,7 @@ $img = "capas-livros/".$img;
 		<img style="width: 200px"src=<?= $img ?> />
 	</section>
 
-	<p> Edicao: <?=$edicao?>, ISBN: <?=$isbn?> </p>
+	<p> Autor: <?= $nomeAutor ?>, Editora: <?= $nomeEditora ?> Edicao: <?=$edicao?>, ISBN: <?=$isbn?> </p>
 </section>
 
 <?php } ?>

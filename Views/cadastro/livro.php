@@ -1,5 +1,5 @@
 <section style="padding: 20px;">
-	<form action="../Controllers/controller.php?acao=cadastro&tipo=livro" method="post" class="form" enctype="multipart/form-data">
+	<form action="../Controllers/cadastro-controller.php?tipo=livro" method="post" class="form" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="titulo">Tíitulo</label>
 			<input type="text" class="form-control" id="titulo" name="titulo"> 

@@ -1,5 +1,5 @@
 <section style="padding: 20px;">
-	<form action="../Controllers/controller.php?acao=cadastro&tipo=editora" method="post" class="form">
+	<form action="../Controllers/cadastro-controller.php?tipo=editora" method="post" class="form">
 		<div class="form-group">
 			<label for="nome">Nome</label>
 			<input type="text" class="form-control" id="nome" name="nome"> 

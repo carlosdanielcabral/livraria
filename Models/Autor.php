@@ -1,6 +1,7 @@
 <?php
 
 class Autor extends Conexao{
+	public $id;
 	public $nome;
 	public $email;
 	public $formacao;
@@ -21,10 +22,25 @@ class Autor extends Conexao{
 		$stmt->execute();
 	}
 
+	public function listarTodosOsAutores() {
+		$query = "SELECT * from autor";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
 	public function buscarAutor() {
 		$query = "SELECT * from autor where nome = :nome";
 		$stmt = $this->conexao->prepare($query);
 		$stmt->bindValue(':nome', $this->nome);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	public function buscarAutorPorId() {
+		$query = "SELECT * from autor where id = :id";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->bindValue(':id', $this->id);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}

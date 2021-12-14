@@ -5,9 +5,7 @@ class LivroAutor extends Conexao {
 	public $idAutor;
 	public $conexao;
 
-	function __construct($idLivro, $idAutor){
-		$this->idLivro = $idLivro;
-		$this->idAutor = $idAutor;
+	function __construct(){
 		$this->conexao = $this->conectarDb();
 	}
 
@@ -17,6 +15,14 @@ class LivroAutor extends Conexao {
 		$stmt->bindValue(':idLivro', $this->idLivro);
 		$stmt->bindValue('idAutor', $this->idAutor);
 		$stmt->execute();
+	}
+
+	public function buscarIdAutor() {
+		$query = "SELECT idAutor from livro_autor where idLivro = :idLivro";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->bindValue(':idLivro', $this->idLivro);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 }
 

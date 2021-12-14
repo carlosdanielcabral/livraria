@@ -1,5 +1,5 @@
 <section style="padding: 20px;">
-	<form action="../Controllers/controller.php?acao=pesquisa" method="post" class="form">
+	<form action="../Controllers/pesquisa-controller.php" method="post" class="form">
 		<div class="form-group">
 			<label>O que você deseja pesquisar?</label>
 			<div class="form-group">
