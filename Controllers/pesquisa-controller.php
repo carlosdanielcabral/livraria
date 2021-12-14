@@ -8,11 +8,9 @@ require "../Models/Editora.php";
 require "../Models/Autor.php";
 require "../Models/LivroAutor.php";
 
-$tipo = $_GET['tipo'] ? $_GET['tipo'] : "indefinido";
-
 
 function formatarDado($dado) {
-	return str_ireplace(" ", "-", (trim(strtolower($dado))));
+	return str_ireplace(" ", "*", (trim(strtolower($dado))));
 }
 
 $livro = new Livro();
@@ -35,7 +33,6 @@ if ($pesquisaEscolha === 'livro') {
 	}
 
 	$_SESSION['resultados'] = $resultados;
-	
 	header('Location: ../index.php?pagina=resultados&tipo=livro');
 
 } else if ($pesquisaEscolha === 'editora') {

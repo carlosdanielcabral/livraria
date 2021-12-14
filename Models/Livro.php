@@ -59,7 +59,7 @@ class Livro extends Conexao{
 		$stmt = $this->conexao->prepare($query);
 		$stmt->bindValue(':titulo', $this->titulo);
 		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function deletarLivro($nome) {

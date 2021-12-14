@@ -25,7 +25,7 @@ class Editora extends Conexao{
 	}
 
 	public function listarTodasAsEditoras() {
-		$query = "SELECT * from editora where nome = :nome";
+		$query = "SELECT * from editora";
 		$stmt = $this->conexao->prepare($query);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);

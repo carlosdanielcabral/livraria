@@ -15,7 +15,6 @@ function formatarDados($string) {
 }
 
 $resultados = $_SESSION['resultados'];
-
 foreach ($resultados as $resultado) {
 	if ($tipoResultado === 'livro'){
 		['id' => $id,'idEditora' => $idEditora, 'edicao' => $edicao, 'titulo' => $titulo, 'fotoCapa' => $img, 'isbn' => $isbn] = $resultado;
@@ -45,7 +44,8 @@ foreach ($resultados as $resultado) {
 
 <?php 
 		} else if ($tipoResultado === 'editora') {
-			['endereco' => $endereco, 'cidade']
+
+			['endereco' => $endereco, 'cidade' => $cidade, 'telefone' => $telefone, 'email' => $email] = $resultado;
 ?>
 
 <section class="editora">
@@ -53,9 +53,25 @@ foreach ($resultados as $resultado) {
 	<ul>
 		<h3>Informações</h3>
 		<li>
-			
+			Endereço: <?= $endereco ?>
+		</li>
+
+		<li>
+			Cidade: <?= $cidade ?>
+		</li>
+
+		<li>
+			Email: <?= $email ?>
+		</li>
+
+		<li>
+			Telefone: <?= $telefone ?>
 		</li>
 	</ul>
 </section>
 
+<?php 
+		}
+	}
+?>
 </section>
