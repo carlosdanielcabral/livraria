@@ -21,7 +21,7 @@ class Autor extends Conexao{
 		$stmt->execute();
 	}
 
-	public function listarAutores() {
+	public function buscarAutor() {
 		$query = "SELECT * from autor where nome = :nome";
 		$stmt = $this->conexao->prepare($query);
 		$stmt->bindValue(':nome', $this->nome);

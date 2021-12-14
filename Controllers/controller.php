@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	require "../Models/Conexao.php";
 	require "../Models/Livro.php";
 	require "../Models/Editora.php";
@@ -16,12 +18,14 @@ function formatarDado($dado) {
 	if ($acao === 'cadastro') {
 			switch ($tipo) {
 				case 'livro':
-					['titulo' => $titulo, 'totalPaginas' => $totalPaginas, 'edicao' => $edicao, 'isbn' => $isbn, 'ano' => $ano, 'editora' => $editora, 'autor' => $autor] = $_POST;
+					['titulo' => $titulo, 'totalPaginas' => $totalPaginas, 'edicao' => $edicao, 'isbn' => $isbn, 'ano' => $ano, 'editora' => $nomeEditora, 'autor' => $autor] = $_POST;
 
 					$fotoCapa = $_FILES['fotoCapa']['name'];
+
 					move_uploaded_file($_FILES['fotoCapa']['tmp_name'], '../capas-livros/'.$fotoCapa);
+
 					$titulo = formatarDado($titulo);
-					$editora = formatarDado($editora);
+					$nomeEditora = !formatarDado($editora) ? 'desconhecido' : $nomeEditora;
 					$autor = formatarDado($autor);
 
 					$livro = new Livro();
@@ -32,27 +36,35 @@ function formatarDado($dado) {
 					$livro->ano = $ano;
 					$livro->fotoCapa = $fotoCapa;
 
-					$editora = !$editora ? 'desconhecido' : $editora;
+					$editora = new Editora();
 
-					$idEditora = $livro->validarEditora($editora);
+					$editora->nome = $nomeEditora;
 
-					if (!$idEditora) {
+					$idEditora = $editora->buscarEditora();
+
+					if (!$idEditora) { // Verifica se a editora passada existe. Caso não, retorna para a página de cadastro
 						header('Location: ../index.php/?pagina=cadastro/livro&erro=editora');
 					} else {
 						$livro->idEditora = $idEditora['id'];
 
 						$livro->cadastrarLivro();
 
-						$idLivro = ($livro->listarLivros())['id'];
+						$idLivro = ($livro->buscarLivro())['id'];
 
-						$idAutor = !($livro->validarAutor($autor)) ? 3 : ($livro->validarAutor($autor))['id'];
+						$autor = new Autor();
+
+						$autor->nome = $autor;
+
+						$idAutor = !($autor->buscarAutor()) ? 3 : ($autor->buscarAutor())['id'];
 
 						$livroAutor = new LivroAutor($idLivro, $idAutor);
 
 						$livroAutor->cadastrarDados();
+
 						header("Location: ../index.php");
 					}
-				break;
+
+					break;
 
 				case 'editora': 
 					['nome' => $nome, 'endereco' => $endereco, 'cidade' => $cidade, 'email' => $email, 'telefone' => $telefone] = $_POST;
@@ -72,9 +84,10 @@ function formatarDado($dado) {
 					$editora->cadastrarEditora();
 
 					header("Location: ../index.php");
-				break;
+					
+					break;
 
-				case 'autor':
+				default:
 					['nome' => $nome, 'email' => $email, 'formacao' => $formacao] = $_POST;
 
 					$foto = $_FILES['foto']['name'];
@@ -93,15 +106,16 @@ function formatarDado($dado) {
 					$autor->cadastrarAutor();
 
 					header("Location: ../index.php");
-				break;
-
-			}
+					
+					break;
+			} // Final do bloco switch
 			
 		
-		} else {
+		} else { // Caso a $acao não seja cadasto / seja pesquisa
 			['pesquisa-escolha' => $pesquisaEscolha, 'tipo-pesquisa' => $tipoPesquisa, 'pesquisa' => $pesquisa] = $_POST;
+
 			$pesquisa = formatarDado($pesquisa);
-			session_start();
+
 			if ($pesquisaEscolha === 'livro') {
 					$livro = new Livro();
 					if ($tipoPesquisa === 'todos') {
@@ -109,7 +123,7 @@ function formatarDado($dado) {
 						
 					} else {
 						$livro->titulo = $pesquisa;
-						$resultados = $livro->listarLivros();
+						$resultados = $livro->buscarLivro();
 					}
 
 					$_SESSION['resultados'] = $resultados;

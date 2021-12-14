@@ -2,6 +2,12 @@
 	margin: 20px!important;
 }
 
+.livros {
+	display: flex;
+}
+
 .livro {
 	border: 1px solid red;
+	width: 300px;
+	margin: 5px;
 }

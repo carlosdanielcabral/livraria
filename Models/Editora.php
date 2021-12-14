@@ -23,10 +23,14 @@ class Editora extends Conexao{
 		$stmt->execute();
 	}
 
-	public function listarEditoras($nome) {
+	public function listarTodasAsEditoras() {
+		$query = "SELECT * from editora where nome = :nome";
+	}
+
+	public function buscarEditora() {
 		$query = "SELECT * from editora where nome = :nome";
 		$stmt = $this->conexao->prepare($query);
-		$stmt->bindValue(':nome', $nome);
+		$stmt->bindValue(':nome', $this->nome);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}

@@ -54,7 +54,7 @@ class Livro extends Conexao{
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-	public function listarLivros() {
+	public function buscarLivro() {
 		$query = "SELECT * from livro where titulo = :titulo";
 		$stmt = $this->conexao->prepare($query);
 		$stmt->bindValue(':titulo', $this->titulo);
