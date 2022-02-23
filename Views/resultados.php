@@ -9,7 +9,6 @@ require "Models/Conexao.php";
 require "Models/Editora.php";
 require "Models/Autor.php";
 require "Models/LivroAutor.php";
-
 function formatarDados($string) {
 	return ucwords(str_ireplace("*", " ", $string));
 }
@@ -17,7 +16,7 @@ function formatarDados($string) {
 $resultados = $_SESSION['resultados'];
 foreach ($resultados as $resultado) {
 	if ($tipoResultado === 'livro'){
-		['id' => $id,'idEditora' => $idEditora, 'edicao' => $edicao, 'titulo' => $titulo, 'fotoCapa' => $img, 'isbn' => $isbn] = $resultado;
+		['id' => $id,'idEditora' => $idEditora, 'edicao' => $edicao, 'titulo' => $titulo, 'fotoCapa' => $img, 'isbn' => $isbn, 'ano' => $ano, 'idLivro' => $idLivro, 'idEditora' => $idEditora, 'idAutor' => $idAutor] = $resultado;
 
 		$editora = new Editora();
 		$autor = new Autor();
@@ -33,19 +32,21 @@ foreach ($resultados as $resultado) {
 		$img = "capas-livros/".$img;
 ?>
 
+<a href="index.php?pagina=livro&livro=<?=$id?>" class="resultado-link">
 <section class="livro">
 	<h2 class="titulo"><?=$titulo?></h2>
 	<section class="capa-img">
 		<img style="width: 200px"src=<?= $img ?> />
 	</section>
 
-	<p> Autor: <?= $nomeAutor ?>, Editora: <?= $nomeEditora ?> Edicao: <?=$edicao?>, ISBN: <?=$isbn?> </p>
+	<p> Ano: <?= $ano ?> </p>
 </section>
+</a>
 
 <?php 
 		} else if ($tipoResultado === 'editora') {
 
-			['nome' => $nome, 'endereco' => $endereco, 'cidade' => $cidade, 'telefone' => $telefone, 'email' => $email] = $resultado;
+			['id' => $id, 'nome' => $nome, 'endereco' => $endereco, 'cidade' => $cidade, 'telefone' => $telefone, 'email' => $email] = $resultado;
 			$nome = formatarDados($nome);
 			$endereco = formatarDados($endereco);
 			$cidade = formatarDados($cidade);
@@ -53,24 +54,16 @@ foreach ($resultados as $resultado) {
 			$email = formatarDados($email);
 ?>
 
+<a href="index.php?pagina=editora&editora=<?=$id?>" class="resultado-link">
 <section class="editora">
 	<h2 class="nome"><?=$nome?></h2>
-	<ul>
-
-		<h3>Informações</h3>
-		<li>Endereço: <?= $endereco ?></li>
-
-		<li>Cidade: <?= $cidade ?></li>
-
-		<li>Email: <?= $email ?></li>
-
-		<li>Telefone: <?= $telefone ?></li>
-	</ul>
+	<h3>Cidade: <?= $cidade ?></h3>
 </section>
+</a>
 
 <?php 
 		} else {
-			['nome' => $nome, 'email' => $email, 'formacao' => $formacao, 'foto' => $foto] = $resultado;
+			['id' => $id, 'nome' => $nome, 'email' => $email, 'formacao' => $formacao, 'foto' => $foto] = $resultado;
 
 			$nome = formatarDados($nome);
 			$email = formatarDados($email);
@@ -78,6 +71,7 @@ foreach ($resultados as $resultado) {
 			$img = 'autores-img/'.$foto;
 ?>
 
+<a href="index.php?pagina=autor&autor=<?=$id?>" class="resultado-link">
 <section class="autor">
 	<h2 class="titulo"><?=$nome?></h2>
 	<section class="capa-img">
@@ -86,9 +80,9 @@ foreach ($resultados as $resultado) {
 
 	<ul>
 		<li>Email: <?= $email ?></li>
-		<li>Formação: <?= $formacao ?></li>
 	</ul>
 </section>
+</a>
 
 <?php
 		}

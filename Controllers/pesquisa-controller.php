@@ -26,7 +26,23 @@ if ($pesquisaEscolha === 'livro') {
 	if ($tipoPesquisa === 'todos') {
 				
 		$resultados = $livro->listarTodosOsLivros();
-						
+	} else if ($tipoPesquisa === 'por-autor') {
+		$autor->nome = $pesquisa;
+		$idAutor = $autor->buscarAutor();
+		print_r($idAutor);	
+
+		if ($idAutor) {
+			$resultados = $livro->obterLivrosPorAutor($idAutor[0]['id']);
+			print_r($resultados);
+		}	
+
+	} else if ($tipoPesquisa === 'por-editora') {
+		$editora->nome = $pesquisa;
+		$idEditora = $editora->buscarEditora();
+
+		if ($idEditora) {
+			$resultados = $livro->obterLivrosPorEditora($idEditora[0]['id']);
+		}
 	} else {
 		$livro->titulo = $pesquisa;
 		$resultados = $livro->buscarLivro();

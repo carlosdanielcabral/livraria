@@ -1,6 +1,7 @@
 <?php
 
 class Livro extends Conexao{
+	public $id;
 	public $titulo;
 	public $totalDePaginas;
 	public $edicao;
@@ -59,6 +60,30 @@ class Livro extends Conexao{
 		$stmt = $this->conexao->prepare($query);
 		$stmt->execute(array("%$this->titulo%"));
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function obterLivrosPorAutor($idAutor) {
+		$query = "SELECT * FROM livro_autor INNER JOIN livro ON livro.id = livro_autor.idLivro where idAutor = :idAutor";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->bindValue(':idAutor', $idAutor);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function obterLivrosPorEditora($idEditora) {
+		$query = "SELECT * FROM editora INNER JOIN livro ON livro.idEditora = editora.id where editora.id = :idEditora";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->bindValue(':idEditora', $idEditora);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function buscarLivroPorId() {
+		$query = "SELECT * from livro where id = :id";
+		$stmt = $this->conexao->prepare($query);
+		$stmt->bindValue(':id', $this->id);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
 	public function deletarLivro($nome) {

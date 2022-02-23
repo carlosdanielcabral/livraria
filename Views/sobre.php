@@ -1,4 +1,4 @@
-<section>
+<section class="sobre">
 	<article>
 		<header>
 			<h2>
