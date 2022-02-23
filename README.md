@@ -6,4 +6,4 @@ Este projeto é um sistema simples de uma livraria, abrangendo o front-end e o b
 
 ## Tecnologias utilizadas
 
-> MySQL, PHP, CSS3, HTML5
+> MySQL, PHP, CSS3, Bootstrap, HTML5
