@@ -2,7 +2,7 @@
 
 ## Contexto
 
-Este projeto é um sistema simples de uma livraria, abrangendo o front-end e o back-end.
+Este projeto é um sistema simples de uma livraria, abrangendo o front-end e o back-end da aplicação.
 
 ## Tecnologias utilizadas
 
